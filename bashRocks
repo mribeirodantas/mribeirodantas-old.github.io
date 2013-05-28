@@ -1,0 +1,70 @@
+Why Bash Script rocks
+
+What is Bash afterall? Bash is the GNU Bourn-Again Shell,
+the first thing your GNU/Linux runs after the control of
+the Operating System is given to you. If we're not talking
+about the Boot Loader, we may be quite sure it's the first
+prompt you're gonna have to lead with when you turn on your
+computer.
+
+Bash prepares the field so that people with a reasonable
+knowledge of GNU can implement extremely powerful scripts.
+You won't ever have to deal with a few subjects people
+doing code would usually have to, since the swiss army knife
+that bashes handles to you is already quite efficient.
+
+Do you want to cut something out of a variable? input? output?
+You can use <i>cut</i>. Edit streams? <i>sed</i>. Pattern
+scanning? <i>awk</i>.
+
+Some people complain Bash is not POSIX, but you can run it
+in POSIX mode with <i>--posix</i> if you like (man bash, for
+more). The thing is that not being POSIX, is the consequence
+of having so many nice features.
+
+There is one specifically that delighted me very much.
+If you have an array <i>foo</i> and one the elements of such
+array is actually a compound word, you may have some problems
+by giving such input to other software. You'd have to quote it
+in order to handle it properly.
+
+According to BashFAQ, one good solution would be:
+[code]
+unset m; i=0
+  words=(apple banana cherry "dog droppings")
+  for w in "${words[@]}"; do
+    m[i++]=$w; m[i++]=""
+  done
+  dialog --menu "Which one?" 12 70 9 "${m[@]}"
+[/code]
+
+The thing here is that I don't like:
+[code]m[i++]=$w; m[i++]=""[/code]
+
+I don't think it's readable nicely enough for beginners, for
+example and well, it does look like a workaround. In Bash you
+can do:
+[code]m+=("$w" "")[/code]
+
+Knowing it, for example, was essential to me when I had
+to handle with filenames with spaces in a filename chooser
+dialog.
+
+$() is also way better than ``
+
+* it's clean syntax
+* it's intuitive syntax
+* it's more readable
+* it's nestable
+* its inner parsing is separate
+
+You have to scape backtick inside backticks:
+[code] echo `command \`command2\`` [/code]
+Instead, in bash you can do:
+[code] echo $(command $(command2))[/code]
+That solves for nesting. No worries about escaping.
+
+For parsing, you might need:
+[code] echo $(command "$(command)")
+
+Speaking of Globbing
