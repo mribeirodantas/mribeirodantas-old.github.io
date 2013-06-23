@@ -5,14 +5,12 @@
 <channel>
 
 <title>Free Software is about USERS</title>
-<pubDate>Wed, 06 June 2013 00:00:00 +0000</pubDate>
 <link>http://mribeirodantas.github.io/FSisaboutusers.html</link>
 
 <description>Since the Free Software Movement was created by the hands of software developers, people nowadays tend to think it's a movement from developers to developers, or from technical people to technical people. Unfortunately, it's a common misconception that has spread all over the community and leads people to believe the four essential freedoms are aimed only at software developers.</description>
 
 <item>
 <title>GNU GPLvX or any later version</title>
-<pubDate>Wed, 26 May 2013 00:00:00 +0000</pubDate>
 <link>http://mribeirodantas.github.io/GNUGPLvX+.html</link>
 
 <description>When it comes to releasing your software's source code, it's extremely important to choose very carefully the best license available, in order to make sure your source code will be taken care of, used, distributed and modified in the way you expect it to be. Most free softwares are released under a GNU license, a large number of them licensed under the GNU General Public License (about 68% of the projects listed on SourceForge.net, as of January 2006).</description>
