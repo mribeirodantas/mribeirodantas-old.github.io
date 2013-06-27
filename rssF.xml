@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<rss version="2.0">
+<channel>
+
+<title>Freedom to be free</title>
+<link>http://mribeirodantas.github.io</link>
+
+
+<item>
+    <title>Why Fedora Project Contributor Agreement (FPCA) does no harm</title>
+    <link>http://mribeirodantas.github.io/WhyFPCADoesNoHarm.html</link>
+
+    <description>The main reason for this post is to prepare Fedora Ambassadors and Contributors for attempts of others to say FPCA is as bad as Canonical's CLA and that our legal document can do harm as much as theirs.
+        Recently, many posts around the web have spoken of the possible trap Canonical may be setting up. They released Mir, a computer display server for GNU/Linux, under the terms of a copyleft license, the GNU GPLv3, which was supposed to be very well seen by the community. Choosing the GNU GPLv3 as the license of your software makes it clear tha you really care about freedom, since GNU GPLv3 is a very effective license against DRM, software patents and attempts to close the source code of the software...</description>
+</item>
+
+</channel>
+</rss> 
