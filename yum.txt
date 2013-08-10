@@ -1,0 +1,43 @@
+# systemd-analyze
+# fpaste
+# fedup
+# List installed packages specifying the repository from where you downloaded it
+repoquery --installed -a --qf '%{nevra} "%{buildtime:date}" %{size} %{yumdb_info.from_repo}'
+
+# List repositories
+yum repolist
+
+# Listing available packages from a specific repository (not the ones already installed)
+yum --disablerepo="*" --enablerepo="rpmfusion-free" list available
+
+# Keep the cache for future use
+keepcache=1 in /etc/yum.conf
+
+# Clean cache
+yum clean all
+
+# Yum shell
+yum shell
+
+(type run to run the queries)
+
+# Query packages not from official Fedora repositories
+
+rpm -qa --qf '%{NAME} %{VENDOR}\n'|grep -v "Fedora Project"
+
+# last installed packages
+rpm -qa --last
+
+# Use yum to install a local package, automatically checking/satisfying dependencies
+yum --nogpgcheck localinstall packagename.arch.rpm
+
+# What package provides ZIP feature?
+yum provides zip
+yum provides file (what package contains file)
+
+# Checking for updates
+yum check-update
+
+# Checking and installing updates if any
+yum update
+
