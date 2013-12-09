@@ -1,0 +1,26 @@
+{
+    "version":"1.0",
+        "name": "TheBomb",
+    "description": "It's the deployment of the game Find The Bomb.",
+    "launch_path": "/map.html",
+    "icons": {
+        "16": "/images/bomb.png",
+        "32": "/images/bomb.png",
+        "48": "/images/bomb.png",
+        "128": "/images/bomb.png"
+    },
+        "developer": {
+        "name": "Marcel and Pablo",
+        "url": "http://mribeirodantas.github.io"
+    },
+    "default_locale": "pt_BR",
+        "type": "privileged",
+    "permissions": {
+        "geolocation": {
+            "description" : "Used to locate me"
+        },
+                "systemXHR": {
+                    "description": "Required to make Network calls"
+            }
+    }
+}
