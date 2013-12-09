@@ -3,6 +3,7 @@
         "name": "TheBomb",
     "description": "It's the deployment of the game Find The Bomb.",
     "launch_path": "/map.html",
+    "appcache_path": "/offline.appcache",
     "icons": {
         "16": "/images/bomb.png",
         "32": "/images/bomb.png",
