@@ -1,0 +1,9 @@
+{
+    "name": "Find The BombM",
+    "package_path" : "http://mribeirodantas.githb.io/fxos/my-app.zip",
+    "version": "1",
+    "developer": {
+        "name": "Marcel e Pablo",
+        "url": "http://mribeirodantas.github.io/fxos/FindTheBomb"
+    }
+}

@@ -1,3 +1,4 @@
+window.scrollTo(0,1);
 function Bomb(latitude, longitude){
     this.latitude = latitude;
     this.longitude = longitude;
@@ -119,6 +120,7 @@ function plantBomb(position){
             draggable:true,
             icon: './images/bomb.png'
         }));
+        //Bomba = new Bomb(-5.842149, -35.200568);
         Bomba = new Bomb(marker[1].position.lat(), marker[1].position.lng());
         $("#warning").html("The bomb was planted at " + marker[1].position.lat() + ":" + marker[1].position.lng());
     });
@@ -155,9 +157,9 @@ function amIclose(position) {
         coordenadas = Bomba.where();
         float:distancia = calculateDistance(coordenadas[0], coordenadas[1], position.coords.latitude, position.coords.longitude);
         distancia = Number((distancia).toFixed(1));
-        if (distancia < 100 && distancia > 10) {
+        if (distancia < 200 && distancia > 50) {
             $("#warning").html("Está esquentando.. Distancia: " + distancia + " metros");
-        } else if (distancia < 10) {
+        } else if (distancia < 50) {
             $("#warning").html("Você achou a bomba!");
             toCreateDiv();
         } else {
@@ -171,7 +173,7 @@ function toCreateDiv() {
     x.setAttribute('id','div1');
     x.innerHTML="Isso aí!";
     document.getElementById('attachDIV').appendChild(x);
-    document.getElementById('div1').innerHTML='<form action="/victory.html"><input type="submit" value="Desarmar!"></form>';
+    document.getElementById('div1').innerHTML='<form action="victory.html"><input type="submit" value="Desarmar!"></form>';
 }
 
 
