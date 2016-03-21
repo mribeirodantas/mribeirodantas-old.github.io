@@ -3,6 +3,20 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!-- Include required JS files -->
+    <script type="text/javascript" src="../javascripts/shCore.js"></script>
+
+    <!--
+        At least one brush, here we choose JS. You need to include a brush for every
+        language you want to highlight
+    -->
+    <script type="text/javascript" src="../javascripts/shBrushCpp.js"></script>
+    <script type="text/javascript" src="../javascripts/shBrushBash.js"></script>
+
+    <!-- Include *at least* the core style and default theme -->
+    <link href="../stylesheets/shCore.css" rel="stylesheet" type="text/css" />
+    <link href="../stylesheets/shThemeDefault.css" rel="stylesheet" type="text/css" />
+
 
                 <title>mribeirodantas's website</title>
   </head>
@@ -20,8 +34,84 @@
         <p style="text-align:justify">O propósito desta página é documentar meus avanços na disciplina de Processamento Digital de Imagens no
             semestre letivo de 2016.1 em torno dos exercícios presentes no material disponibilizado pelo Prof. Dr.
             Agostinho Brito do Departamento de Engenharia de Computação e Automação da Universidade Federal do Rio
-            Grande do Norte.</p>
+            Grande do Norte.<br><br>
 
+            O formato PNG suporta representação de imagens de diversas formas, como em tons de cinza, coloridas e preto-e-branco. Imagens em outros
+            formatos tais como JPEG podem oferecer algumas limitações para os casos que serão abordados. Por exemplo, arquivos JPEG armazenam apenas
+            imagens em formato colorido e, durante o processo de gravação das imagens, o algoritmo de compressão com perdas pode modificar o conteúdo
+             da imagem original a ser gravada. Como a imagem que irei utilizar em alguns exemplos está em JPG, precisei convertê-la em PNG. Para isso,
+             utilizei o aplicativo mogrif como é mostrado abaixo:
+         <pre class="brush: bash">
+             mogrify -format png barba.jpg
+         </pre>
+         <p style="text-align:justify">A imagem pode ser vista abaixo :-)&</p>
+         <center><img src="../images/barba_despenteada.png"><br><br></center>
+
+            No primeiro exercício, preciso implementar um programa regions.cpp o qual deverá solicitar ao usuário as coordenadas de dois pontos P1
+             e P2 localizados dentro dos limites do tamanho da imagem. Estes pontos serão vértices opostos que darão origem a um retângulo, cujo
+             interior deverá ser o negativo da região correspondente na imagem original.<br><br>
+             O código-fonte da solução em C++ segue abaixo:</p>
+
+        <!-- You also need to add some content to highlight, but that is covered elsewhere. -->
+        <pre class="brush: cpp">
+        #include &ltiostream>
+        #include &ltcv.h>
+        #include &lthighgui.h>
+
+        using namespace cv;
+        using namespace std;
+
+        int main(int, char**){
+          Mat image;
+          cv::Size medida;
+          Vec3b val;
+          int p1a, p1b, p2a, p2b, altura, largura;
+
+          image= imread("barba_despenteada.png",CV_LOAD_IMAGE_COLOR);
+
+          medida = image.size();
+          altura = medida.height;
+          largura = medida.width;
+          cout << "Informe as coordenadas de P1:" << endl;
+          cin >> p1a;
+          cin >> p1b;
+          cout << "Informe a coordenada de P2:" << endl;
+          cin >> p2a;
+          cin >> p2b;
+          cout << medida;
+          if (p1a > altura) {
+              p1a = altura;
+          }
+          if (p2a > altura) {
+              p2a = altura;
+          }
+          if (p1b > largura) {
+              p1b = largura;
+          }
+          if (p2b > largura) {
+              p2b = largura;
+          }
+
+          val[0] = 255;   //B
+          val[1] = 255;   //G
+          val[2] = 255;   //R
+
+          for(int i=p1a;i < p2a;i++){
+            for(int j=p1b;j < p2b;j++){
+              image.at&ltVec3b>(i,j)= val - image.at&ltVec3b>(i,j);
+            }
+          }
+
+          imshow("janela", image);
+          waitKey();
+          return 0;
+        }
+        </pre>
+        <p style="text-align:justify">Caso informássemos as coordenadas (250, 0) para o P1 e (300, 500) para o P2,
+            teríamos a imagem abaixo sendo mostrada:</p>
+        <center><img src="../images/tarja.png"><br><br></center>
+      </section>
+      <section id="exercicio1">
 
       </section>
     </div>
@@ -32,4 +122,8 @@
                 <h6>Content managed with vim</h6>
         </center>
   </body>
+  <!-- Finally, to actually run the highlighter, you need to include this JS on your page -->
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+  </script>
 </html>
