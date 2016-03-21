@@ -31,10 +31,11 @@
 
     <div class="container">
       <section id="main_content">
-        <p style="text-align:justify">O propósito desta página é documentar meus avanços na disciplina de Processamento Digital de Imagens no
-            semestre letivo de 2016.1 em torno dos exercícios presentes no material disponibilizado pelo Prof. Dr.
-            Agostinho Brito do Departamento de Engenharia de Computação e Automação da Universidade Federal do Rio
-            Grande do Norte.<br><br>
+        <p style="text-align:justify">O propósito desta página é documentar meus avanços na disciplina de Processamento
+            Digital de Imagens no semestre letivo de 2016.1 em torno dos exercícios presentes no material disponibilizado
+            pelo Prof. Dr. Agostinho Brito do Departamento de Engenharia de Computação e Automação da Universidade Federal
+            do Rio Grande do Norte. Os algoritmos de solução serão escritos em C++ e a biblioteca OpenCV será exaustivamente
+            utilizada.<br><br>
 
             O formato PNG suporta representação de imagens de diversas formas, como em tons de cinza, coloridas e preto-e-branco. Imagens em outros
             formatos tais como JPEG podem oferecer algumas limitações para os casos que serão abordados. Por exemplo, arquivos JPEG armazenam apenas
@@ -46,72 +47,117 @@
          </pre>
          <p style="text-align:justify">A imagem pode ser vista abaixo :-)&</p>
          <center><img src="../images/barba_despenteada.png"><br><br></center>
+        <section id="exercicio1">
+             <p style="text-align:justify">No <b>primeiro exercício</b>, preciso implementar um programa regions.cpp o qual deverá solicitar ao usuário as coordenadas de dois pontos P1
+                 e P2 localizados dentro dos limites do tamanho da imagem. Estes pontos serão vértices opostos que darão origem a um retângulo, cujo
+                 interior deverá ser o negativo da região correspondente na imagem original.<br><br>
+                 O código-fonte da solução segue abaixo:</p>
 
-            No primeiro exercício, preciso implementar um programa regions.cpp o qual deverá solicitar ao usuário as coordenadas de dois pontos P1
-             e P2 localizados dentro dos limites do tamanho da imagem. Estes pontos serão vértices opostos que darão origem a um retângulo, cujo
-             interior deverá ser o negativo da região correspondente na imagem original.<br><br>
-             O código-fonte da solução em C++ segue abaixo:</p>
+            <!-- You also need to add some content to highlight, but that is covered elsewhere. -->
+            <pre class="brush: cpp">
+            #include &ltiostream>
+            #include &ltcv.h>
+            #include &lthighgui.h>
 
-        <!-- You also need to add some content to highlight, but that is covered elsewhere. -->
-        <pre class="brush: cpp">
-        #include &ltiostream>
-        #include &ltcv.h>
-        #include &lthighgui.h>
+            using namespace cv;
+            using namespace std;
 
-        using namespace cv;
-        using namespace std;
+            int main(int, char**){
+              Mat image;
+              cv::Size medida;
+              Vec3b val;
+              int p1a, p1b, p2a, p2b, altura, largura;
 
-        int main(int, char**){
-          Mat image;
-          cv::Size medida;
-          Vec3b val;
-          int p1a, p1b, p2a, p2b, altura, largura;
+              image= imread("barba_despenteada.png",CV_LOAD_IMAGE_COLOR);
 
-          image= imread("barba_despenteada.png",CV_LOAD_IMAGE_COLOR);
+              medida = image.size();
+              altura = medida.height;
+              largura = medida.width;
 
-          medida = image.size();
-          altura = medida.height;
-          largura = medida.width;
-          cout << "Informe as coordenadas de P1:" << endl;
-          cin >> p1a;
-          cin >> p1b;
-          cout << "Informe a coordenada de P2:" << endl;
-          cin >> p2a;
-          cin >> p2b;
-          cout << medida;
-          if (p1a > altura) {
-              p1a = altura;
-          }
-          if (p2a > altura) {
-              p2a = altura;
-          }
-          if (p1b > largura) {
-              p1b = largura;
-          }
-          if (p2b > largura) {
-              p2b = largura;
-          }
+              cout << "Informe as coordenadas de P1:" << endl;
+              cin >> p1a;
+              cin >> p1b;
+              cout << "Informe a coordenada de P2:" << endl;
+              cin >> p2a;
+              cin >> p2b;
 
-          val[0] = 255;   //B
-          val[1] = 255;   //G
-          val[2] = 255;   //R
+              if (p1a > altura) {
+                  p1a = altura;
+              }
+              if (p2a > altura) {
+                  p2a = altura;
+              }
+              if (p1b > largura) {
+                  p1b = largura;
+              }
+              if (p2b > largura) {
+                  p2b = largura;
+              }
 
-          for(int i=p1a;i < p2a;i++){
-            for(int j=p1b;j < p2b;j++){
-              image.at&ltVec3b>(i,j)= val - image.at&ltVec3b>(i,j);
+              val[0] = 255;   //B
+              val[1] = 255;   //G
+              val[2] = 255;   //R
+
+              for(int i=p1a;i < p2a;i++){
+                for(int j=p1b;j < p2b;j++){
+                  image.at&ltVec3b>(i,j)= val - image.at&ltVec3b>(i,j);
+                }
+              }
+
+              imshow("janela", image);
+              waitKey();
+              return 0;
             }
-          }
+            </pre>
+            <p style="text-align:justify">Caso informássemos as coordenadas (250, 0) para o P1 e (300, 500) para o P2,
+                teríamos a imagem abaixo sendo mostrada:</p>
+            <center><img src="../images/tarja.png"><br><br></center>
+        </section>
+        <section id="exercicio2">
+            <p style="text-align:justify">Para o <b>segundo exercício</b> é pedido que seja implementado um programa trocaregioes.cpp
+                que deverá trocar regiões da imagem, formando uma espécie de quebra-cabeças. O código-fonte da solução segue abaixo:</p>
+            <pre class="brush: cpp">
+                #include &ltiostream>
+                #include &ltcv.h>
+                #include &lthighgui.h>
 
-          imshow("janela", image);
-          waitKey();
-          return 0;
-        }
-        </pre>
-        <p style="text-align:justify">Caso informássemos as coordenadas (250, 0) para o P1 e (300, 500) para o P2,
-            teríamos a imagem abaixo sendo mostrada:</p>
-        <center><img src="../images/tarja.png"><br><br></center>
+                using namespace cv;
+                using namespace std;
+
+                using namespace cv;
+
+                int main(int, char**) {
+
+                  Mat image = imread("barba_despenteada.png", CV_LOAD_IMAGE_COLOR);
+                  Mat image1, image2, image3, image4;
+
+                  int largura = image.rows;
+                  int altura = image.cols;
+                  Mat nova_image(0,0, altura, largura);
+                  nova_image = image;
+
+                  image1 = image(Rect(altura/2, largura/2, altura/2, largura/2));
+                  image2 = image(Rect(altura/2, 0, altura/2, largura/2));
+                  image3 = image(Rect(0, largura/2, altura/2, largura/2));
+                  image4 = image(Rect(0, 0, altura/2, largura/2));
+
+                  image1.copyTo(nova_image(Rect(0, 0, altura/2, largura/2)));
+                  image2.copyTo(nova_image(Rect(altura/2, largura/2, altura/2, largura/2)));
+                  image3.copyTo(nova_image(Rect(altura/2, 0, altura/2, largura/2)));
+                  image4.copyTo(nova_image(Rect(0, largura/2, altura/2, largura/2)));
+
+
+                  imshow("image", nova_image);
+                  waitKey();
+
+                  return 0;
+                }
+            </pre>
+            <p style="text-align:justify">A imagem de saída da solução segue abaixo:</p>
+            <center><img src="../images/puzzle.png"><br><br></center>
+        </section>
       </section>
-      <section id="exercicio1">
+
 
       </section>
     </div>
