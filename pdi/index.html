@@ -58,6 +58,7 @@
             #include &ltiostream>
             #include &ltcv.h>
             #include &lthighgui.h>
+            #include &stdlib.h>
 
             using namespace cv;
             using namespace std;
@@ -106,7 +107,7 @@
 
               imshow("janela", image);
               waitKey();
-              return 0;
+              return EXIT_SUCCESS;
             }
             </pre>
             <p style="text-align:justify">Caso informássemos as coordenadas (250, 0) para o P1 e (300, 500) para o P2,
@@ -120,6 +121,7 @@
                 #include &ltiostream>
                 #include &ltcv.h>
                 #include &lthighgui.h>
+                #include &ltstdlib.h>
 
                 using namespace cv;
                 using namespace std;
@@ -150,7 +152,7 @@
                   imshow("image", nova_image);
                   waitKey();
 
-                  return 0;
+                  return EXIT_SUCCESS;
                 }
             </pre>
             <p style="text-align:justify">A imagem de saída da solução segue abaixo:</p>
