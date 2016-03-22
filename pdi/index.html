@@ -196,6 +196,73 @@
                 já que um pixel é representado por um byte, mas não é incomum vermos 10, 12 ou até 16 bits em outras áreas como
                 a área médica.</p>
         </section>
+        <section id="exercicio4">
+            <p style="text-align:justify">O <b>exercício 4</b>...</p>
+        </section>
+        <section id="exercicio5">
+            <p style="text-align:justify">O <b>exercício 5</b> é voltado para o uso do OpenCV não mais com um fluxo estático, como uma
+            imagem, mas com uma sequência de imagens, isto é, um vídeo que pode ser obtido pela sua webcam, por exemplo. Ele pede que
+            equalizemos o que nossa webcam está gravando e façamos uma análise sobre os efeitos da equalização. Como em outros casos,
+            o OpenCV já vem munido de algoritmos que facilitam boa parte das tarefas comuns que nos podem ocorrer no processamento
+            digital de imagens. Neste caso, temos a função equalizeHist. O código-fonte segue abaixo:</p>
+            <pre class="brush: cpp">
+                #include "opencv2/opencv.hpp"
+                #include &ltiostream>
+                #include &ltstdlib.h>
+
+                using namespace std;
+                using namespace cv;
+
+                int main(int, char**){
+
+                    VideoCapture cap(0);
+
+
+                    if(!cap.isOpened())
+                        return -1;
+
+                    namedWindow("Imagem de vídeo", 1);
+
+                    while(1) {
+                        Mat frame;
+                        vector&ltMat> planes;
+                        cap >> frame;
+                        split (frame, planes);
+                        Mat B,G,R;
+
+                        //Equaliza as componeste separadamente
+                        equalizeHist(planes[0], B);
+                        equalizeHist(planes[1], G);
+                        equalizeHist(planes[2], R);
+
+
+                        vector&ltMat> combined;
+
+                        combined.push_back(B);
+                        combined.push_back(G);
+                        combined.push_back(R);
+
+
+                        Mat result;
+
+
+                        merge(combined,result);
+
+                        imshow("Video equalizado", result);
+                        imshow("Video", frame);
+
+                        if(waitKey(30) >= 0) break;
+                    }
+
+                      return EXIT_SUCCESS;
+                }
+            </pre>
+            <p style="align-text:justify">É possível ver a diferença nas filmagens pelo printscreen abaixo:</p>
+            <img src="../images/eq.png" float="left" border="5">
+        </section>
+        <section id="exercicio6">
+            <p style="align-text:justify">No <b>exercício seis</b> </p>
+        </section>
 
       </section>
 
