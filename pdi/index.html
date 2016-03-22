@@ -116,7 +116,11 @@
         </section>
         <section id="exercicio2">
             <p style="text-align:justify">Para o <b>segundo exercício</b> é pedido que seja implementado um programa trocaregioes.cpp
-                que deverá trocar regiões da imagem aleatoriamente, formando uma espécie de quebra-cabeças. O código-fonte da solução segue abaixo:</p>
+                que deverá trocar regiões da imagem aleatoriamente, formando uma espécie de quebra-cabeças. Um dos problemas que encontrei
+                é que dependendo do modo como você gera novas imagens ou copia pedaços dela você pode estar copiando partes da sua imagem já
+                modifiada. Como era uma soft copy, ao passar o pedaço 2 da imagem 1 para o pedaço 1 da imagem 2, em ambas as imagens o pedaço 1
+                tinha agora o pedaço 2 e isso acarretava em uma imagem final com pedaços repetidos. A linha <i>23</i> me permite fazer uma hard
+                copy resolvendo esse problema. O código-fonte da solução segue abaixo:</p>
             <pre class="brush: cpp">
                 #include &ltiostream>
                 #include &ltcv.h>
