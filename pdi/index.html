@@ -116,47 +116,67 @@
         </section>
         <section id="exercicio2">
             <p style="text-align:justify">Para o <b>segundo exercício</b> é pedido que seja implementado um programa trocaregioes.cpp
-                que deverá trocar regiões da imagem, formando uma espécie de quebra-cabeças. O código-fonte da solução segue abaixo:</p>
+                que deverá trocar regiões da imagem aleatoriamente, formando uma espécie de quebra-cabeças. O código-fonte da solução segue abaixo:</p>
             <pre class="brush: cpp">
                 #include &ltiostream>
                 #include &ltcv.h>
                 #include &lthighgui.h>
-                #include &ltstdlib.h>
+                #include &stdlib.h>
 
                 using namespace cv;
                 using namespace std;
 
                 using namespace cv;
 
-                int main(int, char**) {
+                int main(int argc, char const *argv[]) {
 
                   Mat image = imread("barba_despenteada.png", CV_LOAD_IMAGE_COLOR);
                   Mat image1, image2, image3, image4;
 
+                  vector&ltMat> images;
+                  random_device rd;
+                  mt19937 g(rd());
+
                   int largura = image.rows;
                   int altura = image.cols;
-                  Mat nova_image(0,0, altura, largura);
-                  nova_image = image;
+                  Mat final_image(0,0, altura, largura);
+                  final_image = image.clone();
+
 
                   image1 = image(Rect(altura/2, largura/2, altura/2, largura/2));
+                  images.push_back(image1);
                   image2 = image(Rect(altura/2, 0, altura/2, largura/2));
+                  images.push_back(image2);
                   image3 = image(Rect(0, largura/2, altura/2, largura/2));
+                  images.push_back(image3);
                   image4 = image(Rect(0, 0, altura/2, largura/2));
+                  images.push_back(image4);
 
-                  image1.copyTo(nova_image(Rect(0, 0, altura/2, largura/2)));
-                  image2.copyTo(nova_image(Rect(altura/2, largura/2, altura/2, largura/2)));
-                  image3.copyTo(nova_image(Rect(altura/2, 0, altura/2, largura/2)));
-                  image4.copyTo(nova_image(Rect(0, largura/2, altura/2, largura/2)));
+                  shuffle(begin(images), end(images), g);
+                  for (int i=0; i<4; i++) {
+                      if (i==3) {
+                          images[3].copyTo(final_image(Rect(0, 0, altura/2, largura/2)));
+                      } else if (i==0) {
+                          images[0].copyTo(final_image(Rect(altura/2, largura/2, altura/2, largura/2)));
+                      } else if (i==1) {
+                          images[1].copyTo(final_image(Rect(altura/2, 0, altura/2, largura/2)));
+                      } else if (i==2) {
+                          images[2].copyTo(final_image(Rect(0, largura/2, altura/2, largura/2)));
+                      }
+                  }
 
-
-                  imshow("image", nova_image);
+                  imshow("image", final_image);
                   waitKey();
 
                   return EXIT_SUCCESS;
                 }
             </pre>
-            <p style="text-align:justify">A imagem de saída da solução segue abaixo:</p>
-            <center><img src="../images/puzzle.png"><br><br></center>
+            <p style="text-align:justify">Duas imagens resultantes do algoritmo acima podem ser vistas abaixo:</p>
+            <div class="images-exercicio2">
+                <img src="../images/puzzle.png" float="left" border="5">
+                <img src="../images/puzzl2.png" float="right" border="5">
+            </div>
+            <br><br>
         </section>
         <section id="exercicio3">
             <p style="text-align:justify">No <b>exercício três</b> indaga-se sobre as limitações de algoritmos de contagem de
